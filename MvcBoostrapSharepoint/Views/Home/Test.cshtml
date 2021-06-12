@@ -1,0 +1,143 @@
+﻿@model MvcBoostrapQTemplate.Models.View.Home.TestView
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SharePoint Test</title>
+
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="@Url.Content("~/")Content/vendor/fontawesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="@Url.Content("~/")Content/vendor/metisMenu/dist/metisMenu.css" />
+    <link rel="stylesheet" href="@Url.Content("~/")Content/vendor/animate.css/animate.css" />
+    <link rel="stylesheet" href="@Url.Content("~/")Content/vendor/bootstrap-sweetalert-master/dist/sweetalert.css?val=@DateTime.Now.Ticks.ToString()" />
+    <link rel="stylesheet" href="@Url.Content("~/")Content/vendor/bootstrap/dist/css/bootstrap.css?val=@DateTime.Now.Ticks.ToString()" />
+    <link rel="stylesheet" href="@Url.Content("~/")Content/vendor/toastr/build/toastr.min.css?val=@DateTime.Now.Ticks.ToString()" />
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="@Url.Content("~/")Content/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css" />
+    <link rel="stylesheet" href="@Url.Content("~/")Content/fonts/pe-icon-7-stroke/css/helper.css" />
+    <link rel="stylesheet" href="@Url.Content("~/")Content/styles/style.css?val=@DateTime.Now.Ticks.ToString()">
+
+    <!-- Vendor scripts -->
+    <script src="@Url.Content("~/")Content/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="@Url.Content("~/")Content/vendor/jquery-ui/jquery-ui.min.js"></script>
+    <script src="@Url.Content("~/")Content/vendor/bootstrap-sweetalert-master/dist/sweetalert.min.js"></script>
+    <script src="@Url.Content("~/")Content/vendor/toastr/build/toastr.min.js"></script>
+    <script src="@Url.Content("~/")Content/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="@Url.Content("~/")Content/vendor/jquery/dist/jquery.numeric.js"></script>
+
+    <!-- App scripts -->
+    <script src="@Url.Content("~/")Content/scripts/jquery.form.js"></script>
+    <script src="@Url.Content("~/")Content/scripts/homer.js?val=@DateTime.Now.Ticks.ToString()"></script>
+    <script src="@Url.Content("~/")Scripts/Menu.js?val=@DateTime.Now.Ticks.ToString()"></script>
+    <link rel="stylesheet" href="@Url.Content("~/")Content/styles/static_custom.css?val=@DateTime.Now.Ticks.ToString()">
+    <script src="@Url.Content("~/")Scripts/Home/Test.js?val=@DateTime.Now.Ticks.ToString()"></script>
+    <style>
+        .lineControl {
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-radius: 0px;
+            border-bottom: 1px solid #ccc;
+            font-size: large;
+        }
+    </style>
+</head>
+<body class="blank">
+    <div class="color-line"></div>
+    <div class="boxed-wrapper">
+        <div id="wrapper">
+            <div class="col-lg-12 text-center m-t-md" style="">
+                <h1>
+                    SharePoint 365 Test Web Application
+                </h1>
+                <p>
+                    Carga y lectura de archivos remota usando SharePoint Online Client Components SDK <strong>Microsoft.SharePoint.Client.Runtime</strong>
+                </p>
+            </div>
+            <br />
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <!--Carga de Archivos-->
+                <div class="row">
+                    <div class="hpanel">
+                        <div class="panel-body">
+                            <h2>Carga de Archivos</h2>
+                            <hr />
+                            
+                                <form action="/Sharepoint/Upload" name="frm" id="frm" method="post" enctype="multipart/form-data" >
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Seleccione un archivo</label>
+                                                <input class="form-control m-b" type="file" multiple id="FileInput" name="FileInput" accept=".pdf,.xml,.txt,.zip" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="control-label">SharePoint Site URL</label>
+                                                <input type="text" id="txtUploadServerUrl" name="txtUploadServerUrl" class="form-control" value="https://somecompany.sharepoint.com/sites/ITVillahermosa" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Library Document URL</label>
+                                                <input type="text" id="txtUploadLibraryUrl" name="txtUploadLibraryUrl" class="form-control" value="Shared Documents/Invoices/" />
+                                            </div>
+                                        </div>
+                                    
+                                </form>
+                            
+                            <div class="row" style="padding-left:10px;">
+                                <div class="col-sm-4">
+                                    <button class="btn btn-success btn-block" id="cmdUpload" style="width:170px;"><i class="fa fa-cloud-upload"></i> Subir archivo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Mostrar Archivos-->
+                <div class="row">
+                    <div class="hpanel">
+                        <div class="panel-body">
+                            <h2>Lectura y Eliminacion de Archivos</h2>
+                            <hr />
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label id="LabelFileCount" class="control-label">Archivos encontrados</label>
+                                        <button class="btn btn-success btn-block" id="cmdShowFiles" style="width:170px;"><i class="fa fa-cloud-download"></i> Descargar Archivos</button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label class="control-label">Folder</label>
+                                        <button class="btn btn-success btn-block" id="cmdNewFolder" style="width:170px;"><i class="fa fa-folder"></i> Nueva Carpeta</button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="control-label">SharePoint Site URL</label>
+                                        <input type="text" id="txtServerUrl" class="form-control" value="https://somecompany.sharepoint.com/sites/ITVillahermosa" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Library Document URL</label>
+                                        <input type="text" id="txtRelativeUrl" class="form-control" value="Shared Documents/Invoices/" />
+                                    </div>
+                                </div>
+                                <div id="DivTable" class="col-md-12">
+                                    
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+div#lockscreen {
+    width: 0;
+    height: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
